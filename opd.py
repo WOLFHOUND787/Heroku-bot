@@ -1,8 +1,8 @@
 import vk_api, json
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-#token = 'ee08e5aa4c6791be1e64c66f48db6349643a3bf1f3e29a17dba4bb34e849054c615c21721eff2b62fce3e'  #Маме о главном
-token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
+token = 'ee08e5aa4c6791be1e64c66f48db6349643a3bf1f3e29a17dba4bb34e849054c615c21721eff2b62fce3e'  #Маме о главном
+#token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
 
 
 vk_session = vk_api.VkApi(token = token)
