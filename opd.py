@@ -3,7 +3,7 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 
 #token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
-token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
+token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
 
 vk_session = vk_api.VkApi(token = token)
@@ -43,9 +43,7 @@ def get_keyboard(buts):
     #print(first_keyboard)
     # ak = len(list(buts[0][0]))
     # print(ak)
-
     # print(list(nb[0]))
-
     return first_keyboard
 
 #print(nb[i][k][1])
@@ -77,19 +75,29 @@ def sender(id, text, key):
 def send_photo(id, text, key, attachment):
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key, 'attachment': ','.join(attachments)})   #'attachment': ','.join(attachments)
 
-image1 = "C:/Work/OPD/Heroku_bot/multfilm.jpg"         #PHOTO
+# def users_fullname(id, nickname, nom):
+#     vk_session.method('users.get', {'user_ids': id, 'fields': first_name, 'name_case': nom})
+
+image1 = "multfilm.jpg"         #PHOTO
+counter_file = "Counter.txt"
 
 
 users = []
+id_sum = 0
+
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
         if event.to_me:
 
             id = event.user_id
+            #print(type(event.user_id))
+            if id != event.user_id:
+                id_sum += 1
             msg = event.text.lower()
             attachments = []            #PHOTO
             upload_image = upload.photo_messages(photos=image1)[0]          #PHOTO
             attachments.append('photo{}_{}'.format(upload_image['owner_id'], upload_image['id']))           #PHOTO
+
             if msg == 'начать':
                 flag1 = 0
                 for user in users:
@@ -100,9 +108,30 @@ for event in longpoll.listen():
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
+                    id_sum += 1
+                    # print(id_sum)
+                    #= users_fullname(id, first_name, nom)
+                    #print()
+                    with open(counter_file, "a") as file:
+                        ide = str(id) + '\n'
+                        file.write(ide)
+                    # try:
+                    #     counter_file = open(counter_file, "w")
+                    #     try:
+                    #         counter_file.write(str(id))
+                    #     except Exception as e:
+                    #         print(e)
+                    #     finally:
+                    #         counter_file.close()
+                    # except Exception as ex:
+                    #     print(ex)
+                    # file = open(counter_file, "a")
+                    #     file.write(id)
+                    # file.close()
                     sender(id, 'Знаете ли вы о раке молочной железы?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
-
+            else:
+                pass
             for user in users:
                 if user.id == id:
 
@@ -115,6 +144,10 @@ for event in longpoll.listen():
                         if msg == 'хочу узнать':
                             sender(id, 'Какую информацию о раке молочной железы Вы хотели бы узнать?', no_key)
                             user.mode = 'no'
+
+                        if msg == 'показать счётчик':
+                            sender(id, 'Вот колличество людей, использующих бот:', start_key)
+                            sender(id, id_sum, start_key)
 
 
                     if user.mode == 'yes':
