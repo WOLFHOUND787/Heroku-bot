@@ -2,8 +2,8 @@ import vk_api, json
 from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-#token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
-token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
+token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
+# token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
 
 
 vk_session = vk_api.VkApi(token = token)
@@ -77,7 +77,7 @@ def sender(id, text, key):
 def send_photo(id, text, key, attachment):
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key, 'attachment': ','.join(attachments)})   #'attachment': ','.join(attachments)
 
-image1 = "C:/Work/OPD/Heroku_bot/multfilm.jpg"         #PHOTO
+image1 = "multfilm.jpg"         #PHOTO
 
 
 users = []
