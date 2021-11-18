@@ -146,7 +146,7 @@ for event in longpoll.listen():
                             user.mode = 'no'
 
                         if msg == 'показать счётчик':
-                            sender(id, 'Вот колличество людей, использующих бот:', start_key)
+                            sender(id, 'Вот количество людей, использующих бот:', start_key)
                             sender(id, id_sum, start_key)
 
 
