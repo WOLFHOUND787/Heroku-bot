@@ -1,14 +1,15 @@
 import vk_api, json
+from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
-#token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
+#token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
+token = 'cde38555e51d8d7c8fedfa1bd34520a253781adae25fd9e2314e121cb2e1cc0252a6350f2e684e838c926'   #Тест бот
 
 
 vk_session = vk_api.VkApi(token = token)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
-
+upload = VkUpload(vk_session)           #PHOTO
 
 class User():
 
@@ -71,19 +72,24 @@ no_key = get_keyboard([
 
 
 def sender(id, text, key):
-    vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key})
+    vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key})   #'attachment': ','.join(attachments)
+
+def send_photo(id, text, key, attachment):
+    vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key, 'attachment': ','.join(attachments)})   #'attachment': ','.join(attachments)
+
+image1 = "C:/Work/OPD/Heroku_bot/multfilm.jpg"         #PHOTO
 
 
 users = []
-
-
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
         if event.to_me:
 
             id = event.user_id
             msg = event.text.lower()
-
+            attachments = []            #PHOTO
+            upload_image = upload.photo_messages(photos=image1)[0]          #PHOTO
+            attachments.append('photo{}_{}'.format(upload_image['owner_id'], upload_image['id']))           #PHOTO
             if msg == 'начать':
                 flag1 = 0
                 for user in users:
@@ -123,7 +129,7 @@ for event in longpoll.listen():
 
 
                         if msg == 'где можно пройти обследование груди':
-                            sender(id, 'Информация о том, где можно пройти обследование груди....', yes1_key)
+                            send_photo(id, 'Информация о том, где можно пройти обследование груди....', yes1_key, ','.join(attachments))
 
 
                         if msg == 'вернуться':
