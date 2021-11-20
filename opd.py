@@ -2,8 +2,8 @@ import vk_api, json
 from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 
-token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
-# token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+# token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
+token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
 
 vk_session = vk_api.VkApi(token = token)
