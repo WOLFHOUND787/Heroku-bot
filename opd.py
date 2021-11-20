@@ -1,10 +1,10 @@
 import vk_api, json
 from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
+from google_table import ident
 
 #token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
 token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
-
 
 vk_session = vk_api.VkApi(token = token)
 vk = vk_session.get_api()
@@ -112,9 +112,10 @@ for event in longpoll.listen():
                     # print(id_sum)
                     #= users_fullname(id, first_name, nom)
                     #print()
-                    with open(counter_file, "a") as file:
-                        ide = str(id) + '\n'
-                        file.write(ide)
+                    # with open(counter_file, "a") as file:
+                    ide = str(id) # + '\n'
+                    ident(ide)
+                    #     file.write(ide)
                     # try:
                     #     counter_file = open(counter_file, "w")
                     #     try:
@@ -146,7 +147,7 @@ for event in longpoll.listen():
                             user.mode = 'no'
 
                         if msg == 'показать счётчик':
-                            sender(id, 'Вот колличество людей, использующих бот:', start_key)
+                            sender(id, 'Вот количество людей, использующих бот:', start_key)
                             sender(id, id_sum, start_key)
 
 
