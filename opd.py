@@ -1,10 +1,22 @@
 import vk_api, json
+import gspread
 from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
-from google_table import ident
+# from google_table import ident
 
 # token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
 token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+
+gc = gspread.service_account(filename='credentials.json')
+sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
+worksheet = sh.sheet1
+#res = worksheet.get_all_records()
+#res = worksheet.get_all_values()
+#res = worksheet.col_values(1)
+
+def ident(ide):
+    iden = [ide]
+    worksheet.append_row(iden)
 
 vk_session = vk_api.VkApi(token = token)
 vk = vk_session.get_api()
