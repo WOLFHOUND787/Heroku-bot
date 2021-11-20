@@ -10,9 +10,9 @@ token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422
 gc = gspread.service_account(filename='credentials.json')
 sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
 worksheet = sh.sheet1
-#res = worksheet.get_all_records()
-#res = worksheet.get_all_values()
-#res = worksheet.col_values(1)
+# res = worksheet.get_all_records()
+# res = worksheet.get_all_values()
+# res = worksheet.col_values(1)
 
 def ident(ide):
     iden = [ide]
@@ -127,7 +127,7 @@ for event in longpoll.listen():
                     # with open(counter_file, "a") as file:
                     ide = str(id) # + '\n'
                     ident(ide)
-                    #     file.write(ide)
+                    #file.write(ide)
                     # try:
                     #     counter_file = open(counter_file, "w")
                     #     try:
