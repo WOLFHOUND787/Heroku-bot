@@ -7,16 +7,16 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 # token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
 token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
-gc = gspread.service_account(filename='credentials.json')
-sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
-worksheet = sh.sheet1
+#     gc = gspread.service_account(filename='credentials.json')
+#     sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
+#     worksheet = sh.sheet1
 #res = worksheet.get_all_records()
 #res = worksheet.get_all_values()
 #res = worksheet.col_values(1)
 
-def ident(ide):
-    iden = [ide]
-    worksheet.append_row(iden)
+#     def ident(ide):
+#         iden = [ide]
+#         worksheet.append_row(iden)
 
 vk_session = vk_api.VkApi(token = token)
 vk = vk_session.get_api()
@@ -125,8 +125,8 @@ for event in longpoll.listen():
                     #= users_fullname(id, first_name, nom)
                     #print()
                     # with open(counter_file, "a") as file:
-                    ide = str(id) # + '\n'
-                    ident(ide)
+                    #     ide = str(id) # + '\n'
+                    #     ident(ide)
                     #     file.write(ide)
                     # try:
                     #     counter_file = open(counter_file, "w")
