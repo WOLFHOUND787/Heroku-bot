@@ -4,7 +4,7 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 # from google_table import ident
 
-token = 'e80c77b8275cdba34be0c72b99359fe486b453d35d90bb3db4423a945c75c55d2899dfb01ed21de3986be'  #Маме о главном
+token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
 #token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
 gc = gspread.service_account(filename='credentials.json')
