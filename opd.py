@@ -4,7 +4,7 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 # from google_table import ident
 
-token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'
+token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
 # token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
 #token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
