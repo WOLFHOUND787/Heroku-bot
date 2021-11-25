@@ -49,7 +49,7 @@ def get_keyboard(buts):
             color = {'зеленый' : 'positive', 'красный' : 'negative', 'синий' : 'primary', 'белый' : 'secondary'}[buts[i][k][1]]
             nb[i][k] = {"action" : {"type": "text", "payload": "{\"button\": \"" + "1" + "\"}", "label": f"{text}"}, "color": f"{color}"}
             #print(list(buts[2]))
-    first_keyboard = {'one_time': False, 'buttons': nb}
+    first_keyboard = {'one_time': False, 'buttons': nb, 'inline': True}
     first_keyboard = json.dumps(first_keyboard, ensure_ascii=False).encode('utf-8')
     first_keyboard = str(first_keyboard.decode('utf-8'))
     #print(nb[i][k])
