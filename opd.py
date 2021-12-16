@@ -6,9 +6,15 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 # from yandex_geocoder.exceptions import YandexGeocoderAddressNotFound, YandexGeocoderHttpException
 
+<<<<<<< HEAD
 # token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
 # token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
 token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+=======
+token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
+# token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
+#token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+>>>>>>> 4df4c0f99b8e4f62baa93a0225ad910f312626de
 
 gc = gspread.service_account(filename='credentials.json')
 sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
@@ -32,6 +38,7 @@ class User():
         self.id = id
         self.mode = mode
 
+<<<<<<< HEAD
 # class Client:
 #     API_URL = "https://api-maps.yandex.ru/services/constructor/1.0/js/"
 #     PARAMS = {
@@ -164,6 +171,61 @@ def sender(id, text):
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0})
 
 def sender_key(id, text, key):
+=======
+
+def get_keyboard(buts):
+    nb = []
+    color = ''
+    for i in range(len(buts)):
+        nb.append([])
+        for k in range(len(buts[i])):
+            nb[i].append(None)
+            #print(nb[i])
+            #print(len(nb))
+    for i in range(len(buts)):
+        for k in range(len(buts[i])):
+            text = buts[i][k][0]
+            #print(text)
+            # print(list(buts[1][0]))
+            #print([main_list[buts] for buts in indexes])
+            color = {'зеленый' : 'positive', 'красный' : 'negative', 'синий' : 'primary', 'белый' : 'secondary'}[buts[i][k][1]]
+            nb[i][k] = {"action" : {"type": "text", "payload": "{\"button\": \"" + "1" + "\"}", "label": f"{text}"}, "color": f"{color}"}
+            #print(list(buts[2]))
+    first_keyboard = {'one_time': False, 'buttons': nb, 'inline': True}
+    first_keyboard = json.dumps(first_keyboard, ensure_ascii=False).encode('utf-8')
+    first_keyboard = str(first_keyboard.decode('utf-8'))
+    #print(nb[i][k])
+    #print(first_keyboard)
+    # ak = len(list(buts[0][0]))
+    # print(ak)
+    # print(list(nb[0]))
+    return first_keyboard
+
+#print(nb[i][k][1])
+start_key = get_keyboard([
+    [('Да, я знаю о раке молочной железы', 'зеленый')],
+    [('Хочу узнать', 'синий')]
+])
+
+
+yes_key = get_keyboard([
+    [('Как провести самообследование', 'синий')],
+    [('Как проходит профилактический осмотр', 'синий')],
+    [('Где можно пройти обследование груди', 'синий')],
+    [('Вернуться', 'красный')]
+])
+
+
+no_key = get_keyboard([
+    [('Рак молочной железы', 'синий')],
+    [('Факторы риска', 'синий')],
+    [('Возможные признаки', 'синий')],
+    [('Вернуться', 'красный')]
+])
+
+
+def sender(id, text, key):
+>>>>>>> 4df4c0f99b8e4f62baa93a0225ad910f312626de
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'keyboard': key})   #'attachment': ','.join(attachments)
 
 def send_photo_key(id, text, key, attachment):
