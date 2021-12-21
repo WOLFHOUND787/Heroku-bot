@@ -6,9 +6,9 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 # from yandex_geocoder.exceptions import YandexGeocoderAddressNotFound, YandexGeocoderHttpException
 
-token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
+# token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
 # token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
-# token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
 gc = gspread.service_account(filename='credentials.json')
 sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
@@ -82,6 +82,15 @@ dop_key = {
 dop_key = json.dumps(dop_key, ensure_ascii=False).encode('utf-8')
 dop_key = str(dop_key.decode('utf-8'))
 
+dopin_key = {
+    "one_time": False,
+    "inline": True,
+    "buttons": [
+    [get_button(label="Начать", color="positive")]
+    ]
+}
+dopin_key = json.dumps(dopin_key, ensure_ascii=False).encode('utf-8')
+dopin_key = str(dopin_key.decode('utf-8'))
 
 start_key = {
     "one_time": False,
@@ -218,7 +227,9 @@ for event in longpoll.listen():
                     sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
             elif nuke == 0: 
-                sender_key(id, 'Бот был перезагружен, извините, используйте кнопку "Начать", чтобы продолжить', dop_key)
+                sender_key(id, 'Бот был перезагружен, извините', dop_key)
+                time.sleep(0.03)
+                sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
             for user in users:
                 if user.id == id:
 
