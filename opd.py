@@ -87,8 +87,8 @@ start_key = {
     "one_time": False,
     "inline": True,
     "buttons": [
-    [get_button(label="Знаю о раке молочной железы больше", color="primary")],
-    [get_button(label="Немного, но хочу узнать", color="primary")]
+    [get_button(label="Как и где можно пройти обследование", color="primary")],
+    [get_button(label="О раке молочной железы", color="primary")]
     ]
 }
 start_key = json.dumps(start_key, ensure_ascii=False).encode('utf-8')
@@ -173,12 +173,14 @@ def send_photo(id, text, attachment1):
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0, 'attachment': ','.join(attachments1)})   #'attachment': ','.join(attachments)
 
 image1 = "opd.jpg"         #PHOTO
-image2 = "mama.png"
+image2 = "mama.jpg"
 counter_file = "Counter.txt"
 
 
 users = []
 id_sum = 0
+
+nuke = 0    # START
 
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
@@ -195,34 +197,38 @@ for event in longpoll.listen():
             attachments1 = []            #PHOTO
             upload_image1 = upload.photo_messages(photos=image2)[0]          #PHOTO
             attachments1.append('photo{}_{}'.format(upload_image1['owner_id'], upload_image1['id']))
+            
             if msg == 'начать':
+                # nuke += 1
                 flag1 = 0
                 for user in users:
                     if user.id == id:
-                        sender_key(id, 'Что вы знаете о здоровье своей груди?', start_key)
+                        sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                         #sender(id, 'Выберите действие', start_key)
                         user.mode = 'start'
                         # ident(ide)
+                        nuke += 1
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
                     id_sum += 1
+                    nuke += 1
                     ide = str(id) # + '\n'
                     ident(ide)
-                    sender_key(id, 'Что вы знаете о здоровье своей груди?', start_key)
+                    sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
-            else:
-                pass
+            elif nuke == 0: 
+                sender_key(id, 'Бот был перезагружен, извините, используйте кнопку "Начать", чтобы продолжить', dop_key)
             for user in users:
                 if user.id == id:
 
                     if user.mode == 'start':
 
-                        if msg == 'знаю о раке молочной железы больше':
+                        if msg == 'как и где можно пройти обследование':
                             sender_key(id, 'Хотите ли вы узнать?', yes_key)
                             user.mode = 'yes'
 
-                        if msg == 'немного, но хочу узнать':
+                        if msg == 'о раке молочной железы':
                             sender_key(id, 'Какую информацию о здоровье груди Вы хотели бы узнать?', no_key)
                             user.mode = 'no'
 
@@ -265,9 +271,8 @@ for event in longpoll.listen():
                             time.sleep(0.8)
                             sender_key(id, 'Для жителей Томской области:\nТомский областной онкологический диспансер (https://tomonco.ru/). Контакт-центр: +7 (3822) 909-505\nОнкологическая клиника НИИ онкологии Томского НИМЦ (https://onco.tnimc.ru/kontakty/) Справочное бюро: +7 (3822) 418-059', yes_key)
 
-
                         if msg == 'вернуться':
-                            sender_key(id, 'Берегите себя и будьте здоровы!\n\nЧто вы знаете о здоровье своей груди?', start_key)
+                            sender_key(id, 'Берегите себя и будьте здоровы!\n\nКакую информацию вы хотите узнать?', start_key)
                             user.mode = 'start'
 
 
@@ -287,7 +292,6 @@ for event in longpoll.listen():
                             time.sleep(1.5)
                             sender_key(id, 'Есть и хорошая новость: существует ряд факторов, которые снижают риск возникновения РМЖ, и на них вы сами, своими силами, можете повлиять. Вот некоторые из них:\n1.поддержание оптимальной массы тела, без резких колебаний;\n2.регулярная физическая нагрузка;\n3.ограничение или отказ от алкоголя и курения;\n4.грудное вскармливание;\n5.психоэмоциональная устойчивость, позитивное отношение к жизни;\n6.регулярное прохождение медицинских осмотров, в том числе у врача-маммолога.', no_key)
 
-
                         if msg == 'возможные признаки рмж':
                             sender(id, 'Источник: ВОЗ (https://www.who.int/ru/news-room/fact-sheets/detail/breast-cancer)')
                             time.sleep(0.3)
@@ -300,5 +304,5 @@ for event in longpoll.listen():
                             sender_key(id, 'Рак молочной железы может распространяться в другие части тела и вызывать другие симптомы. Часто распространение рака становится заметным прежде всего в лимфатических узлах подмышечной области, хотя женщина может и не почувствовать появление лимфатических узлов с метастатическим поражением. \nСо временем раковые клетки могут распространиться в другие органы, включая лёгкие, печень, мозг и кости. Как только они достигают этих мест, могут появиться новые симптомы, связанные с раком, такие как боль в костях или головные боли.', no_key)
 
                         if msg == 'вернуться':
-                            sender_key(id, 'Берегите себя и будьте здоровы!\n\nЧто вы знаете о здоровье своей груди?', start_key)
+                            sender_key(id, 'Берегите себя и будьте здоровы!\n\nКакую информацию вы хотите узнать?', start_key)
                             user.mode = 'start'
