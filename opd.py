@@ -189,7 +189,7 @@ counter_file = "Counter.txt"
 users = []
 id_sum = 0
 
-nuke = 0    # START
+# nuke = 0    # START
 
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
@@ -216,20 +216,20 @@ for event in longpoll.listen():
                         #sender(id, 'Выберите действие', start_key)
                         user.mode = 'start'
                         # ident(ide)
-                        nuke += 1
+                        # nuke += 1
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
                     id_sum += 1
-                    nuke += 1
+                    # nuke += 1
                     ide = str(id) # + '\n'
                     ident(ide)
                     sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
-            elif nuke == 0: 
-                sender_key(id, 'Бот был перезагружен, извините', dop_key)
-                time.sleep(0.03)
-                sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
+            # elif nuke == 0: 
+                # sender_key(id, 'Бот был перезагружен, извините', dop_key)
+                # time.sleep(0.03)
+                # sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
             for user in users:
                 if user.id == id:
 
