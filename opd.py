@@ -6,9 +6,9 @@ from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
 # from yandex_geocoder.exceptions import YandexGeocoderAddressNotFound, YandexGeocoderHttpException
 
-token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
+# token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
 # token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
-# token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
+token = 'fe5852d84287b94028f9364ef0179c5bf93c10bd07498d094c64ce2864809e3ed780422695ce2efc357f8'   #Тест бот
 
 gc = gspread.service_account(filename='credentials.json')
 sh = gc.open_by_key('141YkihhlI7rb1RPKI_BG4QU3oy3pp2Pj22gTRXj2i90')
@@ -189,7 +189,7 @@ counter_file = "Counter.txt"
 users = []
 id_sum = 0
 
-# nuke = 0    # START
+nuke = 0    # START
 
 for event in longpoll.listen():
     if event.type == VkEventType.MESSAGE_NEW:
@@ -208,7 +208,7 @@ for event in longpoll.listen():
             attachments1.append('photo{}_{}'.format(upload_image1['owner_id'], upload_image1['id']))
             
             if msg == 'начать':
-                # nuke += 1
+                nuke += 1
                 flag1 = 0
                 for user in users:
                     if user.id == id:
@@ -221,15 +221,15 @@ for event in longpoll.listen():
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
                     id_sum += 1
-                    # nuke += 1
+                    nuke += 1
                     ide = str(id) # + '\n'
                     ident(ide)
                     sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
-            # elif nuke == 0: 
-                # sender_key(id, 'Бот был перезагружен, извините', dop_key)
-                # time.sleep(0.03)
-                # sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
+            elif nuke == 0: 
+                sender_key(id, 'Бот был перезагружен, извините', dop_key)
+                time.sleep(0.03)
+                sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
             for user in users:
                 if user.id == id:
 
