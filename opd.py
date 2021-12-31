@@ -126,8 +126,6 @@ for event in longpoll.listen():
         if event.to_me:
 
             id = event.user_id
-            if id != event.user_id:
-                id_sum += 1
             msg = event.text.lower()
             attachments = []            #PHOTO
             upload_image = upload.photo_messages(photos=image1)[0]          #PHOTO
@@ -142,19 +140,16 @@ for event in longpoll.listen():
                 for user in users:
                     if user.id == id:
                         sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
-                        #sender(id, 'Выберите действие', start_key)
                         user.mode = 'start'
-                        # ident(ide)
                         nuke += 1
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
                     id_sum += 1
                     nuke += 1
-                    ide = str(id) # + '\n'
+                    ide = str(id)
                     ident(ide)
                     sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
-                    #sender(id, 'Выберите действие:', start_key)
             elif nuke == 0:
                 sender_key(id, 'Бот был перезагружен, извините', dop_key)
                 time.sleep(0.03)
