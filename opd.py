@@ -4,7 +4,6 @@ import time
 import requests
 from vk_api import VkUpload             #PHOTO
 from vk_api.longpoll import VkLongPoll, VkEventType
-# from yandex_geocoder.exceptions import YandexGeocoderAddressNotFound, YandexGeocoderHttpException
 
 # token = 'b4359d6f1673767941abaae313afb6422590af036a63a6d12389e049ea8185aa43f680851db615414345a'
 # token = '30f2cc0514d6d9f1caa89578f0524f18050d2903355bd08e97e1172414d38e8529ec64aa58a332ca59335'  #Маме о главном
@@ -31,36 +30,6 @@ class User():
     def __init__(self, id, mode, cash):
         self.id = id
         self.mode = mode
-
-# class Client:
-#     API_URL = "https://api-maps.yandex.ru/services/constructor/1.0/js/"
-#     PARAMS = {
-#         "format": json,
-#         "um": "constructor%3A7718fdc4b32c32497724ccd37bd6f2ded48436fa4d993ff5d000eab36bae801a&amp",
-#         "width": 559&amp,
-#         "height": 577&amp,
-#         "lang": ru_RU&amp,
-#         "scroll": True
-#     }
-# link = "https://yandex.ru/maps/?um=constructor%3A7718fdc4b32c32497724ccd37bd6f2ded48436fa4d993ff5d000eab36bae801a&source=constructorLink"
-# responce = requests.get(link).text
-# print(responce)
-# def get_keyboard(buts):
-#     nb = []
-#     color = ''
-#     for i in range(len(buts)):
-#         nb.append([])
-#         for k in range(len(buts[i])):
-#             nb[i].append(None)
-#     for i in range(len(buts)):
-#         for k in range(len(buts[i])):
-#             text = buts[i][k][0]
-#             color = {'зеленый' : 'positive', 'красный' : 'negative', 'синий' : 'primary', 'белый' : 'secondary'}[buts[i][k][1]]
-#             nb[i][k] = {"action" : {"type": "text", "payload": "{\"button\": \"" + "1" + "\"}", "label": f"{text}"}, "color": f"{color}"}
-#     first_keyboard = {'one_time': True, 'buttons': nb, 'inline': False}
-#     first_keyboard = json.dumps(first_keyboard, ensure_ascii=False).encode('utf-8')
-#     first_keyboard = str(first_keyboard.decode('utf-8'))
-#     return first_keyboard
 
 def get_button(label, color, payload=""):
     return {
@@ -129,45 +98,6 @@ no_key = {
 }
 no_key = json.dumps(no_key, ensure_ascii=False).encode('utf-8')
 no_key = str(no_key.decode('utf-8'))
-
-location_key = {
-    "one_time": False,
-    "inline": True,
-    "buttons": [
-        [{
-            "action": {
-                "type": "location",
-                "payload": "{\"button\": \"send_location\"}",
-            }
-        }],
-        [get_button(label="(РМЖ)", color="primary")]
-    ]
-}
-location_key = json.dumps(location_key, ensure_ascii=False).encode('utf-8')
-location_key = str(location_key.decode('utf-8'))
-# start_key = get_keyboard([
-#     [('Знаю о раке молочной железы больше', 'зеленый')],
-#     [('Немного, но хочу узнать', 'синий')]
-# ])
-#
-#
-# yes_key = get_keyboard([
-#     [('Как провести самообследование', 'синий')],
-#     [('Как проходит профилактический осмотр', 'синий')],
-#     [('Где можно пройти обследование груди', 'синий')],
-#     [('Где мне помогут', 'синий')],
-#     [('Вернуться', 'красный')]
-# ])
-#
-#
-# no_key = get_keyboard([
-#     [('Рак молочной железы (РМЖ)', 'синий')],
-#     [('Факторы риска РМЖ', 'синий')],
-#     [('Возможные признаки РМЖ', 'синий')],
-#     [('Вернуться', 'красный')]
-# ])
-# def send_test(id, text, key):
-#     vk_session.method('messages.send', {'user_id' : event.user_id, 'message' : text, 'random_id' : 0, "keyboard": key})
 
 def sender(id, text):
     vk_session.method('messages.send', {'user_id' : id, 'message' : text, 'random_id' : 0})
