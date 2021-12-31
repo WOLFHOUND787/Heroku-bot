@@ -206,9 +206,9 @@ for event in longpoll.listen():
             attachments1 = []            #PHOTO
             upload_image1 = upload.photo_messages(photos=image2)[0]          #PHOTO
             attachments1.append('photo{}_{}'.format(upload_image1['owner_id'], upload_image1['id']))
-            
+
             if msg == 'начать':
-                # nuke += 1
+                nuke += 1
                 flag1 = 0
                 for user in users:
                     if user.id == id:
@@ -226,7 +226,7 @@ for event in longpoll.listen():
                     ident(ide)
                     sender_key(id, 'Какую информацию вы хотите узнать?', start_key)
                     #sender(id, 'Выберите действие:', start_key)
-            elif nuke == 0: 
+            elif nuke == 0:
                 sender_key(id, 'Бот был перезагружен, извините', dop_key)
                 time.sleep(0.03)
                 sender_key(id, 'Используйте кнопку "Начать", чтобы продолжить', dopin_key)
