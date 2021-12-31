@@ -216,7 +216,7 @@ for event in longpoll.listen():
                         #sender(id, 'Выберите действие', start_key)
                         user.mode = 'start'
                         # ident(ide)
-                        nuke += 1
+                        # nuke += 1
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
