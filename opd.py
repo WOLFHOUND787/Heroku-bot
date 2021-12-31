@@ -208,7 +208,6 @@ for event in longpoll.listen():
             attachments1.append('photo{}_{}'.format(upload_image1['owner_id'], upload_image1['id']))
 
             if msg == 'начать':
-                nuke += 1
                 flag1 = 0
                 for user in users:
                     if user.id == id:
@@ -216,7 +215,7 @@ for event in longpoll.listen():
                         #sender(id, 'Выберите действие', start_key)
                         user.mode = 'start'
                         # ident(ide)
-                        # nuke += 1
+                        nuke += 1
                         flag1 = 1
                 if flag1 == 0:
                     users.append(User(id, 'start', 0))
